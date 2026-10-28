@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>STICK BOHEME</title>
+<meta name="theme-color" content="#111111">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+@font-face{font-family:"Vazirmatn";font-weight:400;font-display:swap;src:url(Vazirmatn-Regular.woff2) format("woff2")}
+@font-face{font-family:"Vazirmatn";font-weight:600;font-display:swap;src:url(Vazirmatn-SemiBold.woff2) format("woff2")}
+@font-face{font-family:"Vazirmatn";font-weight:800;font-display:swap;src:url(Vazirmatn-ExtraBold.woff2) format("woff2")}
+:root{--bg:#111111;--ink:#f1ede6;--mute:#a39d92;--line:rgba(241,237,230,.14);--accent:#c8a24a;--accent-ink:#1a1408}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);min-height:100%}
+body{font-family:"Vazirmatn",Tahoma,"Segoe UI",sans-serif;padding:calc(env(safe-area-inset-top,0px) + 22px) 18px calc(env(safe-area-inset-bottom,0px) + 24px);
+  background:radial-gradient(1000px 600px at 50% -10%,#2b2620 0%,var(--bg) 62%);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto}
+header{text-align:center;padding:10px 0 22px}
+h1{margin:0;font-size:1.7rem;font-weight:800;letter-spacing:-.2px}
+.sub{color:var(--mute);font-size:.9rem;margin:.5rem 0 0}
+.rule{width:54px;height:1px;background:var(--accent);margin:14px auto 0;opacity:.8}
+.pill{display:none;margin-top:14px;font-size:.75rem;color:var(--accent);border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem}
+.pill.ok{display:inline-block}
+#inst{display:none;margin-top:12px;font:inherit;font-size:.85rem;font-weight:600;background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;padding:.5rem 1.2rem}
+.grid{display:grid;gap:12px}
+a.card{display:flex;align-items:center;justify-content:space-between;gap:12px;text-decoration:none;color:var(--ink);
+  border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:16px;padding:1rem 1.1rem;min-height:64px}
+a.card:active{transform:scale(.99);background:rgba(255,255,255,.07)}
+.card .t{font-weight:600;font-size:1.02rem}
+.card .s{display:block;color:var(--mute);font-size:.78rem;margin-top:.15rem}
+.card .arr{color:var(--accent);font-size:1.4rem}
+.panel{margin-top:22px;border:1px solid var(--line);border-radius:16px;padding:1rem 1.1rem;background:rgba(255,255,255,.025)}
+.panel h2{margin:0 0 .4rem;font-size:.95rem;font-weight:600}
+.panel p{margin:.25rem 0;color:var(--mute);font-size:.8rem;line-height:1.9}
+.btn{margin-top:.6rem;font:inherit;font-size:.9rem;font-weight:600;background:transparent;color:var(--ink);border:1px solid var(--accent);border-radius:12px;padding:.7rem 1rem;width:100%}
+.btn:disabled{opacity:.6}
+.bar{height:3px;background:var(--line);border-radius:3px;margin-top:.7rem;overflow:hidden;display:none}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+footer{text-align:center;color:#6c675e;font-size:.72rem;margin-top:22px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>STICK BOHEME</h1>
+    <p class="sub">مدل‌های STICK BOHEME · مشاهده‌ی سه‌بعدی و واقعیت افزوده</p>
+    <div class="rule"></div>
+    <span class="pill" id="pill"></span><br>
+    <button id="inst">نصب برنامه روی این دستگاه</button>
+  </header>
+  <div class="panel" id="iosHint" style="display:none;margin-bottom:14px"><h2>نصب روی آیفون/آیپد</h2><p>در Safari دکمه‌ی Share (مربع با فلش) را بزنید و Add to Home Screen را انتخاب کنید.</p></div>
+  <div class="grid" id="grid"></div>
+  <div class="panel" id="panel">
+    <h2>آماده‌سازی برای استفاده‌ی آفلاین</h2>
+    <p>مدل‌های اندروید و تصاویر (حدود 4 مگابایت) هنگام نصب خودکار ذخیره می‌شوند. صبر کنید تا نشان «آفلاین آماده است» بالای صفحه بیاید.</p>
+    <div id="usdzBox" style="display:none">
+      <p>فایل‌های آیفون/آیپد (USDZ، حدود 11 مگابایت) حجیم‌اند و فقط با زدن این دکمه ذخیره می‌شوند. بهتر است روی Wi-Fi انجام شود.</p>
+      <button class="btn" id="usdzBtn">ذخیره‌ی فایل‌های آیفون/آیپد</button>
+      <div class="bar" id="bar"><i id="barfill"></i></div>
+      <p id="usdzMsg"></p>
+    </div>
+  </div>
+  <footer>مشاهده‌ی AR روی اندروید: Chrome · آیفون/آیپد: Quick Look</footer>
+</div>
+<script>
+const ITEMS = [{"href": "stick_boheme_01.html", "title": "STICK BOHEME 01", "sub": ""}, {"href": "stick_boheme_02.html", "title": "STICK BOHEME 02", "sub": ""}, {"href": "stick_boheme_03.html", "title": "STICK BOHEME 03", "sub": ""}, {"href": "stick_boheme_04.html", "title": "STICK BOHEME 04", "sub": ""}, {"href": "stick_boheme_05.html", "title": "STICK BOHEME 05", "sub": ""}, {"href": "stick_boheme_06.html", "title": "STICK BOHEME 06", "sub": ""}];
+const HAS_USDZ = true;
+const $ = id => document.getElementById(id);
+ITEMS.forEach(it => {
+  const a = document.createElement('a'); a.className = 'card'; a.href = it.href;
+  const l = document.createElement('span'); const t = document.createElement('span'); t.className = 't'; t.textContent = it.title; l.appendChild(t);
+  if (it.sub) { const s = document.createElement('span'); s.className = 's'; s.textContent = it.sub; l.appendChild(s); }
+  const r = document.createElement('span'); r.className = 'arr'; r.textContent = '‹';
+  a.appendChild(l); a.appendChild(r); $('grid').appendChild(a);
+});
+const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const isAndroid = /Android/i.test(navigator.userAgent);
+if (HAS_USDZ && !isAndroid) $('usdzBox').style.display = 'block';
+if (isIOS && !(navigator.standalone || (window.matchMedia && matchMedia('(display-mode: standalone)').matches))) $('iosHint').style.display = 'block';
+function ready() { $('pill').textContent = '✓ آفلاین آماده است'; $('pill').classList.add('ok'); }
+let deferred = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferred = e; $('inst').style.display = 'inline-block'; });
+$('inst').onclick = () => { if (!deferred) return; deferred.prompt(); deferred.userChoice.then(() => { deferred = null; $('inst').style.display = 'none'; }); };
+function toSW(msg) { navigator.serviceWorker.ready.then(reg => reg.active && reg.active.postMessage(msg)); }
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(() => navigator.serviceWorker.ready).then(() => { ready(); toSW({ type: 'status' }); }).catch(() => {});
+  navigator.serviceWorker.addEventListener('message', e => {
+    const d = e.data || {};
+    if (d.type === 'ready') ready();
+    if (d.type === 'status') $('usdzMsg').textContent = d.usdzCached + ' از ' + d.usdzTotal + ' فایل آیفون ذخیره شده است.';
+    if (d.type === 'usdz-progress') { $('bar').style.display = 'block'; $('barfill').style.width = (d.done / d.total * 100) + '%'; $('usdzMsg').textContent = d.done + ' از ' + d.total + ' فایل ذخیره شد…'; }
+    if (d.type === 'usdz-done') { $('usdzBtn').disabled = false; $('usdzMsg').textContent = 'همه‌ی فایل‌های آیفون ذخیره شد ✓'; }
+  });
+}
+$('usdzBtn').onclick = () => { $('usdzBtn').disabled = true; $('usdzMsg').textContent = 'در حال ذخیره…'; toSW({ type: 'cache-usdz' }); };
+</script>
+</body>
+</html>

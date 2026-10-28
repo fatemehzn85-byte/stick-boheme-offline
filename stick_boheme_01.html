@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>STICK BOHEME 01</title>
+
+<script src="model-viewer-umd.min.js"></script>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: Tahoma, "Segoe UI", sans-serif;
+    background: #f7f5f2;
+    color: #2a2a2a;
+    text-align: center;
+  }
+
+  header {
+    padding: 18px 16px 10px;
+  }
+
+  h1 {
+    font-size: 20px;
+    margin: 0 0 4px;
+  }
+
+  p.subtitle {
+    font-size: 13px;
+    color: #666;
+    margin: 0;
+  }
+
+  model-viewer {
+    width: 100%;
+    height: 65vh;
+    background-color: #eeeeee;
+    --poster-color: transparent;
+  }
+
+  .ar-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 16px;
+  }
+
+  .ar-button {
+    display: inline-block;
+    width: 85%;
+    max-width: 340px;
+    padding: 13px 0;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  .ar-android {
+    background-color: #1a1a1a;
+    color: #fff;
+  }
+
+  .ar-ios {
+    background-color: #ffffff;
+    color: #1a1a1a;
+    border: 1.5px solid #1a1a1a;
+  }
+
+  .note {
+    font-size: 12px;
+    color: #888;
+    padding: 0 20px 24px;
+    line-height: 1.7;
+  }
+</style>
+<meta name="theme-color" content="#111111">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+
+<body>
+<a href="index.html" style="position:fixed;top:max(10px,env(safe-area-inset-top));left:10px;z-index:99999;background:rgba(0,0,0,.55);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 14px;font:600 13px Tahoma,Arial,sans-serif;text-decoration:none;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)">‹ فهرست</a>
+
+<header>
+  <h1>STICK BOHEME 01</h1>
+  <p class="subtitle">پیش‌نمایش سه‌بعدی و مشاهده واقعیت افزوده در فضای واقعی شما</p>
+</header>
+
+<model-viewer
+  id="stick-boheme-viewer"
+  src="STICK_BOHEME_01.glb"
+  ios-src="STICK_BOHEME_01.usdz"
+  alt="STICK BOHEME 01"
+  camera-controls
+  disable-zoom
+  camera-orbit="0deg 75deg auto"
+  min-camera-orbit="auto 55deg auto"
+  max-camera-orbit="auto 100deg auto"
+  shadow-intensity="1"
+  exposure="1"
+  ar-scale="fixed">
+</model-viewer>
+<script>(function(){var C=customElements.get("model-viewer");if(C){C.dracoDecoderLocation=new URL("draco/",location.href).href;}})();</script>
+
+<div class="ar-buttons">
+
+  <a class="ar-button ar-android"
+     href="intent://arvr.google.com/scene-viewer/1.0?file=https://fatemehzn85-byte.github.io/stick-boheme-offline/STICK_BOHEME_01.glb&mode=ar_preferred&resizable=false#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=https://fatemehzn85-byte.github.io/stick-boheme-offline/stick_boheme_01.html;end;">
+    مشاهده در واقعیت افزوده (اندروید)
+  </a>
+
+  <a class="ar-button ar-ios"
+     rel="ar"
+     href="STICK_BOHEME_01.usdz#allowsContentScaling=0">
+    <img style="display:none" src="STICK_BOHEME_01.usdz">
+    مشاهده در واقعیت افزوده (آیفون)
+  </a>
+
+</div>
+
+<p class="note">
+  برای مشاهده واقعیت افزوده، این صفحه را از طریق گوشی موبایل (اندروید یا آیفون) باز کنید.
+  این قابلیت روی رایانه/دسکتاپ فعال نیست. ابعاد نمایش‌داده‌شده با اندازه واقعی محصول مطابقت دارد.
+</p>
+
+<!-- AR Android: اول WebXR (داخل Chrome)، اگر نشد همان لینک Scene Viewer. فقط روی اندروید فعال می‌شود؛ آیفون دست‌نخورده است. -->
+<script>
+(function(){
+  var mv = document.querySelector('model-viewer');
+  var btn = document.querySelector('.ar-android');
+  if (!mv || !btn || !/Android/i.test(navigator.userAgent)) return;
+  mv.setAttribute('ar', '');
+  mv.setAttribute('ar-modes', 'webxr');
+  var xr = false;
+  if (navigator.xr && navigator.xr.isSessionSupported) {
+    navigator.xr.isSessionSupported('immersive-ar')
+      .then(function(ok){ xr = ok; })
+      .catch(function(){});
+  }
+  btn.addEventListener('click', function(e){
+    if (xr && mv.canActivateAR) {
+      e.preventDefault();
+      try { mv.activateAR(); } catch (err) { location.href = btn.getAttribute('href'); }
+    }
+  });
+})();
+</script>
+
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(function(){});}</script>
+</body>
+</html>
